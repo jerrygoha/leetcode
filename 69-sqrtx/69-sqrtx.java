@@ -1,33 +1,32 @@
 class Solution {
     public int mySqrt(int x) {
-        if (x < 2){
-            return x;
+        
+        if (x <= 1){
+          return x;  
         }
         
-        int low = 1;
-        int high = x/2;
-        int mid = 0;
-        int result = 0;
+        int start = 1;
+        int end = x/2;
         
-        while(low<=high){
-            mid = (low+high)/2;
-            long multiple = mid * (long)mid;
+        while(start < end) {
+            // start가 변하지 않는 경우, 무한루프에 갇힐 수 있음.
+            // 항상 mid를 변경시키기 위해 매 루프마다 mid +1 해줌
+            int mid = (start + (end-start)/2) + 1;
             
-            if(multiple == x){
-                return mid;
+            // 오버플로우를 피하기 위해 나눗셈 사용
+            int div = x/mid;
+            
+            if(div == mid){
+              return mid;  
             }
             
-            else if(multiple < x){
-                low = mid + 1;
-                result = mid;
-            }
-            
-            else {
-                high = mid - 1;
-            }
+            if(div > mid){
+              start = mid;  
+            } else{
+              end = mid-1;  
+            } 
         }
         
-        return result;
-        
+        return start;
     }
 }
