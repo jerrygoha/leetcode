@@ -1,5 +1,6 @@
+/* Write your PL/SQL query statement below */
 select ct.name as Customers
-    from customers as ct
-    left outer join orders as od
+    from customers ct
+    left outer join orders od
         on ct.id = od.customerId
-    where od.id is null
+    where od.id is null;
