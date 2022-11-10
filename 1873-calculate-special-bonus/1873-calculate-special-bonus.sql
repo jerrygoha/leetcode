@@ -1,6 +1,8 @@
-# Write your MySQL query statement below
+/* Write your PL/SQL query statement below */
 select
      employee_id
-    ,if(employee_id%2 = 1 and name not like 'M%', salary, 0) as bonus
+    ,case when mod(employee_id,2) = 1 and name not like 'M%' then salary
+        else 0 end
+        as bonus
     from Employees
-    order by employee_id asc
+    order by employee_id asc;
